@@ -1,0 +1,16 @@
+# see https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/nlb/
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
+spec:
+  selector:
+    app: sample-app
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: LoadBalancer
