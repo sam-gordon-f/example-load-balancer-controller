@@ -6,10 +6,14 @@ metadata:
   namespace: tenant1
   # https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/annotations/
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/subnets: subnet-05e1c98ed0f5b109e,subnet-07f5bb81f661df61b,subnet-0a4e6232630820516
-    alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/load-balancer-name: sample-ingress
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/subnets: subnet-058c6d2c63ef6dbd7,subnet-029d9418d5be4ad2b,subnet-0f4fdef51814b866a
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/target-node-labels: app=sample-app
+  labels:
+    app: sample-app-ingress
 spec:
   rules:
   - host: echoserver.example.com
